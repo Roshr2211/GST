@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Visualization Dashboard</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        select, button {
+            padding: 8px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        img {
+            max-width: 100%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Data Visualization Dashboard</h1>
+
+    <form method="post" action="{% url 'index' %}">
+        {% csrf_token %}
+
+        <label for="x_axis_column">Select X-axis column:</label>
+        <select name="x_axis_column" required>
+            {% for column in df_timeaxis.columns %}
+                <option value="{{ column }}">{{ column }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="y_axis_column">Select Y-axis column:</label>
+        <select name="y_axis_column" required>
+            {% for column in df_cost.columns %}
+                <option value="{{ column }}">{{ column }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="chart_type">Select Chart Type:</label>
+        <select name="chart_type" required>
+            <option value="Bar Graph">Bar Graph</option>
+            <option value="Bubble Graph">Bubble Graph</option>
+            <option value="Pie Chart">Pie Chart</option>
+            <option value="Scatter Plot">Scatter Plot</option>
+            <option value="Heat Map">Heat Map</option>
+        </select>
+
+        <button type="submit">Generate Chart</button>
+    </form>
+
+    {% if chart_image %}
+        <img src="{{ chart_image }}" alt="Generated Chart">
+    {% endif %}
+
+    <!-- Add any additional JavaScript scripts or libraries here -->
+</body>
+</html>
