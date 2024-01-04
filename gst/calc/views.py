@@ -7,7 +7,7 @@ import seaborn as sns
 
 def index(request):
     # Assuming you have the path to your CSV file
-    csv_file_path = 'gst/calc/annexure1divisionwisesummary_csv.csv'
+    csv_file_path = 'GST\gst\calc\annexure1divisionwisesummary_csv.csv'
 
     try:
         # Read the CSV file into a DataFrame
